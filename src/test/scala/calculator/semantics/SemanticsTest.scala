@@ -39,5 +39,21 @@ class NumSemanticsTests extends FunSpec
     }
 
   }
+  
+  describe("Subtraction") {
+
+    it("can subtract two numbers") {
+      program("1-1") should compute (0)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("1 - 2 - 100") should compute (-101)
+    }
+
+    it("can handle negative numbers") {
+      program("1 - -1") should compute (2)
+    }
+
+  }
 
 }

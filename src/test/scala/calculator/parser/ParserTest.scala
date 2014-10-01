@@ -21,7 +21,7 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
       program("121") should parseAs ( 121 )
     }
     
-    it ("can be a negative number") {
+    it ("cannot be a negative number") {
       program("-10") should parseAs ( -10 )
     }
     
@@ -40,6 +40,18 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
     
     it("can be chained (and is left-associative)") {
       program("1 + 2 + 100") should parseAs ( (1 |+| 2) |+| 100 )
+    }
+
+  }
+  
+  describe("Subtraction") {
+
+    it("can subtract two numbers") {
+      program("1-1") should parseAs ( 1 |-| 1 )
+    }
+    
+    it("can be chained (and is left-associative)") {
+      program("1 - 2 - 100") should parseAs ( (1 |-| 2) |-| 100 )
     }
 
   }
