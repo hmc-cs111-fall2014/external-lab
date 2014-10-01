@@ -71,5 +71,25 @@ class NumSemanticsTests extends FunSpec
     }
 
   }
+  
+  describe("Division") {
+
+    it("can divide two numbers") {
+      program("1/1") should compute (1)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("200 / 2 / 10") should compute (10)
+    }
+
+    it("can handle negative numbers") {
+      program("10 / -2") should compute (-5)
+    }
+    
+    it("cannot handle divide by zero") {
+      program("1 / 0") should raiseError[ArithmeticException]
+    }
+
+  }
 
 }

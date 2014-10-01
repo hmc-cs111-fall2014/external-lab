@@ -18,5 +18,6 @@ package object ir {
     def |+|(right: Expr) = Plus(left, right)
     def |-|(right: Expr) = Sub(left, right)
     def |*|(right: Expr) = Mult(left, right)
+    def |/|(right: Expr) = Div(left, right)
   }
 }
