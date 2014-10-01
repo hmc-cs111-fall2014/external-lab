@@ -21,7 +21,7 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
       program("121") should parseAs ( 121 )
     }
     
-    it ("cannot be a negative number") {
+    it ("can be a negative number") {
       program("-10") should parseAs ( -10 )
     }
     
