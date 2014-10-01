@@ -5,7 +5,7 @@ import scala.language.implicitConversions
 // internal DSL for creating ASTs
 package object ir {
 
-  // to use a number on its on
+  // to use a number on its own
   implicit def int2Number(i: Int): Num = Num(i)
   
   // to use a number as part of a binary operation...
