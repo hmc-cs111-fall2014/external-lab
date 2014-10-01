@@ -11,7 +11,14 @@ object CalcParser extends JavaTokenParsers with PackratParsers {
     // expressions
     lazy val expr: PackratParser[Expr] = 
       (   expr~"+"~fact ^^ {case l~"+"~r ⇒ l |+| r}
+        | expr~"-"~fact ^^ {case l~"-"~r => l |-| r}
+        | expr~"*"~fact ^^ {case l~"*"~r => l |*| r}
+        | expr~"/"~fact ^^ {case l~"/"~r => l |/| r}
         | fact )
+    
+        
+    // terms
+    // TODO: IMPLEMENT AS TERMS FOR PRECENDENCE
         
     // factors
     lazy val fact: PackratParser[Expr] =
