@@ -69,6 +69,10 @@ class NumSemanticsTests extends FunSpec
     it("can handle negative numbers") {
       program("1 * -1") should compute (-1)
     }
+    
+    it("has higher precedence than addition") {
+      program("1 + 2 * 3") should compute ( 7 )
+    }
 
   }
   
@@ -88,6 +92,22 @@ class NumSemanticsTests extends FunSpec
     
     it("cannot handle divide by zero") {
       program("1 / 0") should raiseError[ArithmeticException]
+    }
+    
+    it("has higher precedence than subtraction") {
+      program("10 - 4 / 2") should compute ( 8 )
+    }
+
+  }
+  
+  describe("Parenthetical") {
+
+    it("is fine to surround expressions with parentheses") {
+      program("(1)") should compute ( 1 )
+    }
+    
+    it("affects associativity") {
+      program("3 * (2 + 1)") should compute ( 9 )
     }
 
   }

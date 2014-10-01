@@ -22,7 +22,8 @@ object CalcParser extends JavaTokenParsers with PackratParsers {
         
     // factors
     lazy val fact: PackratParser[Expr] =
-      number
+      (   number
+        | "("~>expr<~")" )
       
     // numbers
     def number: Parser[Num] = wholeNumber ^^ {s ⇒ Num(s.toInt)}
