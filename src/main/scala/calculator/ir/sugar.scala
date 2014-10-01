@@ -17,5 +17,6 @@ package object ir {
   implicit class ExprBuilder(val left: Expr) {
     def |+|(right: Expr) = Plus(left, right)
     def |-|(right: Expr) = Sub(left, right)
+    def |*|(right: Expr) = Mult(left, right)
   }
 }

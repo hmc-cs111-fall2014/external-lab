@@ -55,5 +55,21 @@ class NumSemanticsTests extends FunSpec
     }
 
   }
+  
+  describe("Multiplication") {
+
+    it("can multiply two numbers") {
+      program("1*1") should compute (1)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("1 * 2 * 100") should compute (200)
+    }
+
+    it("can handle negative numbers") {
+      program("1 * -1") should compute (-1)
+    }
+
+  }
 
 }
