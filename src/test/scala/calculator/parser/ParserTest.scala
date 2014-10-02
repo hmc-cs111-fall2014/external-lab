@@ -43,4 +43,65 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
     }
 
   }
+  
+  describe("Subtraction") {
+
+    it("can subtract two numbers") {
+      program("1-1") should parseAs ( 1 |-| 1 )
+    }
+    
+    it("can be chained (and is left-associative)") {
+      program("1 - 2 - 100") should parseAs ( (1 |-| 2) |-| 100 )
+    }
+
+  }
+  
+  describe("Multiplication") {
+
+    it("can multiply two numbers") {
+      program("1*1") should parseAs ( 1 |*| 1 )
+    }
+    
+    it("can be chained (and is left-associative)") {
+      program("1 * 2 * 100") should parseAs ( (1 |*| 2) |*| 100 )
+    }
+
+  }  
+  
+  describe("Division") {
+
+    it("can divide two numbers") {
+      program("1/1") should parseAs ( 1 |/| 1 )
+    }
+    
+    it("can be chained (and is left-associative)") {
+      program("1 / 2 / 100") should parseAs ( (1 |/| 2) |/| 100 )
+    }
+
+  }
+
+  describe("Parentheses") {
+
+    it("can handle parentheses") {
+      program("(1 + 2) * (3 + 4)") should parseAs ( (1 |+| 2) |*| (3 |+| 4) )
+    }
+    
+    it("can nest parentheses") {
+      program("(1 - (4 - 3) * 2) - 4") should parseAs ( ( 1 |-| ( ( 4 |-| 3 ) |*| 2 ) ) |-| 4 )
+    }
+
+  }   
+  
+  describe("General") {
+
+    it("can handle order of operations and left associativity") {
+      program("1 + 2 * 3 + 4 / 2") should parseAs ( (1 |+|  (2 |*| 3)) |+| (4 |/| 2) )
+    }
+    
+    it("can handle complex composition of operators") {
+      program("2 - 7 * ((3 + 2)*4) / 4") should parseAs ( 2 |-| ((7 |*| ((3 |+| 2) |*| 4) ) |/| 4 ) )
+    }
+
+  }  
+  
 }
