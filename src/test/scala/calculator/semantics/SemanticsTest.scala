@@ -40,4 +40,91 @@ class NumSemanticsTests extends FunSpec
 
   }
 
+  describe("Subtraction") {
+    it("can subtract two numbers") {
+      program("3-1") should compute (2)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("3 - 2 - 1") should compute (0)
+    }
+
+    it("can handle negative numbers") {
+      program("-1 - -1") should compute (0)
+    }
+  }
+
+  describe("Multiplication") {
+    it("can multiply two numbers") {
+      program("3 * 1") should compute (3)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("3 * 2 * 1") should compute (6)
+    }
+
+    it("can handle negative numbers") {
+      program("-1 * -1") should compute (1)
+    }
+  }
+
+  describe("Division") {
+    it("can divide two numbers") {
+      program("4 / 2") should compute (2)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("4 / 2 / 2") should compute (1)
+    }
+
+    it("can handle negative numbers") {
+      program("10 / -5") should compute (-2)
+    }
+  }
+
+  describe("Parenthetical Expressions") {
+    it("can be a singleton") {
+      program("(1)")   should compute(1)
+      program("(1+1)") should compute(2)
+      program("(1-1)") should compute(0)
+      program("(1*1)") should compute(1)
+      program("(1/1)") should compute(1)
+    }
+
+    it("can override priority") {
+      program("(1 + 2) * (2 + 1)") should compute (9)
+      program("(2 + 2) / (2 + 2)") should compute (1)
+    }
+  }
+
+  describe("Priority") {
+    it("can multiply and add in correct priority order") {
+      program("1 + 2 * 3") should compute (7)
+    }
+
+    it("can multiply and subtract in correct priority order") {
+      program("1 - 2 * 3") should compute (-5)
+    }
+
+    it("can multiply, add, subtract in correct priority order") {
+      program("1 + 2 - 2 * 3") should compute (-3)
+    }
+
+    it("can divide and add in correct priority order") {
+      program("3 + 6 / 3") should compute (5)
+    }
+
+    it("can divide and subtract in correct priority order") {
+      program("2 - 6 / 3") should compute (0)
+    }
+
+    it("can divide, add, subtract in correct priority order") {
+      program("1 + 2 - 9 / 3") should compute (0)
+    }
+
+    it("can multiply, divide, add, subtract in correct priority order") {
+      program("1 + 2 - 9 / 3 * 3") should compute (-6)
+    }
+
+  }
 }
