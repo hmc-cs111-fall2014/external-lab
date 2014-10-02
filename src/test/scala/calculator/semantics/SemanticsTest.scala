@@ -8,7 +8,7 @@ import calculator.semantics._
 import edu.hmc.langtools._
 
 class NumSemanticsTests extends FunSpec
-    with LangInterpretMatchers[AST, Int] {
+    with LangInterpretMatchers[AST, Any] {
 
   override val parser = CalcParser.apply _
   override val interpreter = eval _
@@ -94,6 +94,42 @@ class NumSemanticsTests extends FunSpec
     it("can override priority") {
       program("(1 + 2) * (2 + 1)") should compute (9)
       program("(2 + 2) / (2 + 2)") should compute (1)
+    }
+  }
+
+  describe("Less Than Comparison") {
+    it("can compare two numbers") {
+      program("2 < 1") should compute (false)
+      program("1 < 2") should compute (true)
+    }
+
+    it("can compare to expressions") {
+      program("3 + 2 < 2 * 3") should compute (true)
+      program("3 * 2 < 2 + 3") should compute (false)
+    }
+  }
+
+  describe("Equality") {
+    it("can compare two numbers") {
+      program("2 = 1") should compute (false)
+      program("1 = 1") should compute (true)
+    }
+
+    it("can compare to expressions") {
+      program("3 + 2 + 1 = 2 * 3") should compute (true)
+      program("3 * 2 = 2 + 3") should compute (false)
+    }
+  }
+
+  describe("Greater Than Comparison") {
+    it("can compare two numbers") {
+      program("2 > 1") should compute (true)
+      program("1 > 2") should compute (false)
+    }
+
+    it("can compare to expressions") {
+      program("3 + 2 > 2 * 3") should compute (false)
+      program("3 * 2 > 2 + 3") should compute (true)
     }
   }
 

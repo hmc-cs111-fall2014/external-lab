@@ -6,7 +6,14 @@ import calculator.ir._
 object CalcParser extends JavaTokenParsers with PackratParsers {
 
     // parsing interface
-    def apply(s: String): ParseResult[AST] = parseAll(expr, s)
+    def apply(s: String): ParseResult[AST] = parseAll(comp, s)
+
+    // comparisons
+    lazy val comp: PackratParser[Expr] = 
+      (   expr~"<"~expr ^^ {case l~"<"~r => l |<| r}
+        | expr~">"~expr ^^ {case l~">"~r => l |>| r}
+        | expr~"="~expr ^^ {case l~"="~r => l |=| r}
+        | expr )
 
     // expressions
     lazy val expr: PackratParser[Expr] = 
