@@ -40,4 +40,60 @@ class NumSemanticsTests extends FunSpec
 
   }
 
+  describe("Subtraction") {
+
+    it("can subtract two numbers") {
+      program("1 - 1") should compute (0)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("1 - 2 - 2") should compute (-3)
+    }
+
+    it("can handle negative numbers") {
+      program("1 - -1") should compute (2)
+    }
+
+  }
+
+  describe("Multiplication") {
+
+    it("can multiply two numbers") {
+      program("2 * 3") should compute (6)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("1 * 2 * 2") should compute (4)
+    }
+
+    it("can handle negative numbers") {
+      program("1 * -1") should compute (-1)
+    }
+
+    it("can handle TWO negative numbers") {
+      program("-1 * -1") should compute (1)
+    }
+
+  }
+
+  describe("Division") {
+
+    it("can divide two numbers") {
+      program("6 / 3") should compute (2)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("8 / 2 / 2") should compute (2)
+    }
+
+    it("can handle negative numbers") {
+      program("1 * -1") should compute (-1)
+    }
+
+    it("can handle TWO negative numbers") {
+      program("-1 * -1") should compute (1)
+    }
+
+  }
+
 }
