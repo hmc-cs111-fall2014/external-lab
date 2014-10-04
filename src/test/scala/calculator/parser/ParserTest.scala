@@ -35,7 +35,7 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
   describe("Addition") {
 
     it("can add two numbers") {
-      program("1+1") should parseAs ( 1 |+| 1 )
+      program("1 + 1") should parseAs ( 1 |+| 1 )
     }
     
     it("can be chained (and is left-associative)") {
@@ -47,7 +47,7 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
   describe("Subtraction") {
     
     it("can subtract two numbers") {
-      program("1-1") should parseAs (1 |-| 1)
+      program("1 - 1") should parseAs (1 |-| 1)
     }
     
     it("can be chained (and is left-associative)") {
@@ -58,22 +58,32 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
   describe("Multiplication") {
     
     it("can multiply two numbers") {
-      program("2*3") should parseAs (2 |*| 3)
+      program("2 * 3") should parseAs ( 2 |*| 3 )
     }
     
     it("can be chained (and is left-associative)") {
-      program("3 * 2 * 1") should parseAs ( (3 |*| 2) |*| 1)
+      program("3 * 2 * 1") should parseAs ( (3 |*| 2) |*| 1 )
     }
   }
   
   describe("Division") {
     
     it("can divide two numbers") {
-      program("6/3") should parseAs (6 |/| 3)
+      program("6 / 3") should parseAs (6 |/| 3)
     }
     
     it("can be chained (and is left-associative)") {
-      program("20 / 2 / 5") should parseAs ( (20 |/| 2) |/| 5)
+      program("20 / 2 / 5") should parseAs ( (20 |/| 2) |/| 5 )
+    }
+  }
+  
+  describe("Parenthetical Expressions") {
+    it("can represent an expression") {
+      program("(6 * 3)") should parseAs ( (6 |*| 3) )
+    }
+    
+    it("can be chained (and is left-associative)") {
+      program("((6 * 3) * 4)") should parseAs ( ((6 |*| 3) |*| 4) )
     }
   }
 }

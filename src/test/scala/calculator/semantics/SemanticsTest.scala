@@ -27,7 +27,7 @@ class NumSemanticsTests extends FunSpec
   describe("Addition") {
 
     it("can add two numbers") {
-      program("1+1") should compute (2)
+      program("1 + 1") should compute (2)
     }
 
     it("can be chained (and is left-associative)") {
@@ -58,7 +58,7 @@ class NumSemanticsTests extends FunSpec
   
   describe("Multiplication") {
     it("can multiply two numbers") {
-      program("5*3") should compute (15)
+      program("5 * 3") should compute (15)
     }
     
     it("can be chained (and is left-associative)") {
@@ -73,7 +73,7 @@ class NumSemanticsTests extends FunSpec
   describe("Division") {
     
     it("can divide two numbers") {
-      program("6/3") should compute (2)
+      program("6 / 3") should compute (2)
     }
     
     it("can be chained (and is left-associative)") {
@@ -82,6 +82,16 @@ class NumSemanticsTests extends FunSpec
     
     it("can handle negative numbers") {
       program("15 / -3") should compute (-5)
+    }
+  }
+  
+  describe("Parenthetical Expressions") {
+    it("can represent an expression") {
+      program("(6 * 3)") should compute (18)
+    }
+    
+    it("can be chained (and is left-associative)") {
+      program("((6 * 3) * 4)") should compute (72)
     }
   }
 
