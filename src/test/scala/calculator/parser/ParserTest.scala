@@ -32,6 +32,22 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
 
   }
   
+  describe("Parenthetical Expressions") {
+
+    it("can be a number") {
+      program("(1)") should parseAs ( Parens(1) )
+    }
+    
+    it ("can be a full expression") {
+      program("(10+10)") should parseAs ( Parens(10 |+| 10) )
+      program("(10 / 2)") should parseAs ( Parens(10 |/| 2) )
+    }
+    
+    it ("can be nested") {
+      program("((10 / 2) / 5)") should parseAs ( Parens(Parens(10 |/| 2) |/| 5) )
+    }
+  }
+  
   describe("Addition") {
 
     it("can add two numbers") {

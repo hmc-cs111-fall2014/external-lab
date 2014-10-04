@@ -23,6 +23,22 @@ class NumSemanticsTests extends FunSpec
     }
 
   }
+  
+   describe("Parenthetical Expressions") {
+
+    it("can be a number") {
+      program("(1)") should compute ( 1 )
+    }
+    
+    it ("can be a full expression") {
+      program("(10+10)") should compute ( 20 )
+      program("(10 / 2)") should compute ( 5 )
+    }
+    
+    it ("can be nested") {
+      program("((10 / 2) / 5)") should compute ( 1 )
+    }
+  }
 
   describe("Addition") {
 
