@@ -39,5 +39,57 @@ class NumSemanticsTests extends FunSpec
     }
 
   }
+  
+  describe("Subtraction") {
+
+    it("can subtract two numbers") {
+      program("1-1") should compute (0)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("100 - 1 - 2") should compute (97)
+    }
+
+    it("can handle negative numbers") {
+      program("1 - -1") should compute (2)
+    }
+
+  }
+  
+  describe("Multiplication") {
+
+    it("can multiply two numbers") {
+      program("1*1") should compute (1)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("100 + 5 * 2") should compute (110)
+      program("100 * 1 * 2") should compute (200)
+      program("100 * 5 + 2") should compute (502)
+    }
+
+    it("can handle negative numbers") {
+      program("1 * -1") should compute (-1)
+    }
+
+  }
+  
+  describe("Division") {
+
+    it("can divide two numbers") {
+      program("1/1") should compute (1)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("100 + 6 / 2") should compute (103)
+      program("100 / 1 * 2") should compute (102)
+      program("100 / 5 + 2") should compute (22)
+    }
+
+    it("can handle negative numbers") {
+      program("1 / -1") should compute (-1)
+    }
+
+  }
 
 }
