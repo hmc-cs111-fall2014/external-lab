@@ -93,7 +93,13 @@ class NumSemanticsTests extends FunSpec
     it("can handle TWO negative numbers") {
       program("-1 * -1") should compute (1)
     }
+  }
 
+  describe("Parentheticals") {
+
+    it("can change associativity") {
+      program("1 - (1 - 1)") should compute (1)
+    }
   }
 
 }

@@ -77,5 +77,14 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
     }
   }
 
+  describe("Parentheticals") {
+    it("is legal") {
+      program("(1)") should parseAs (1)
+    }
+
+    it("changes precedence ") {
+      program("1 + (1 + 1)") should parseAs (1 |+| (1 |+| 1))
+    }
+  }
 
 }
