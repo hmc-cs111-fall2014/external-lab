@@ -79,7 +79,7 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
   
   describe("Parenthetical Expressions") {
     it("can represent an expression") {
-      program("(6 * 3)") should parseAs ( (6 |*| 3) )
+      program("(6 * 3)") should parseAs (6 |*| 3)
     }
     
     it("can be chained (and is left-associative)") {
