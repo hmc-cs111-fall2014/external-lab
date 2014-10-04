@@ -85,5 +85,9 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
     it("can be chained (and is left-associative)") {
       program("((6 * 3) * 4)") should parseAs ( ((6 |*| 3) |*| 4) )
     }
+    
+    it("follows the order of operations") {
+      program("5 * (3 - 1)") should parseAs ( 5 |*| (3 |-| 1) )
+    }
   }
 }

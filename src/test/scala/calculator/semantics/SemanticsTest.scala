@@ -93,6 +93,10 @@ class NumSemanticsTests extends FunSpec
     it("can be chained (and is left-associative)") {
       program("((6 * 3) * 4)") should compute (72)
     }
+    
+    it("follows the order of operations") {
+      program("5 * (3 - 1)") should compute (10)
+    }
   }
 
 }
