@@ -69,5 +69,20 @@ class NumSemanticsTests extends FunSpec
       program("5 * -10") should compute (-50)
     }
   }
+  
+  describe("Division") {
+    
+    it("can divide two numbers") {
+      program("6/3") should compute (2)
+    }
+    
+    it("can be chained (and is left-associative)") {
+      program("20 / 2 / 5") should compute (2)
+    }
+    
+    it("can handle negative numbers") {
+      program("15 / -3") should compute (-5)
+    }
+  }
 
 }

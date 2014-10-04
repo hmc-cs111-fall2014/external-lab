@@ -65,4 +65,15 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
       program("3 * 2 * 1") should parseAs ( (3 |*| 2) |*| 1)
     }
   }
+  
+  describe("Division") {
+    
+    it("can divide two numbers") {
+      program("6/3") should parseAs (6 |/| 3)
+    }
+    
+    it("can be chained (and is left-associative)") {
+      program("20 / 2 / 5") should parseAs ( (20 |/| 2) |/| 5)
+    }
+  }
 }

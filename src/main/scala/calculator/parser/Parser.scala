@@ -13,6 +13,7 @@ object CalcParser extends JavaTokenParsers with PackratParsers {
       (   expr~"+"~fact ^^ {case l~"+"~r ⇒ l |+| r}
         | expr~"-"~fact ^^ {case l~"-"~r ⇒ l |-| r}
         | expr~"*"~fact ^^ {case l~"*"~r ⇒ l |*| r}
+        | expr~"/"~fact ^^ {case l~"/"~r ⇒ l |/| r}
         | fact )
         
     // factors
