@@ -39,5 +39,73 @@ class NumSemanticsTests extends FunSpec
     }
 
   }
+  
+    describe("Subtraction") {
+
+    it("can subtract two numbers") {
+      program("1-1") should compute (0)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("1 - 2 - 100") should compute (-101)
+    }
+
+    it("can handle negative numbers") {
+      program("2 - -1") should compute (3)
+    }
+
+  }
+    
+  describe("Multiplication") {
+
+    it("can multiply two numbers") {
+      program("2*2") should compute (4)
+    }
+
+    it("can be chained (and is left-associative with PEMDAS)") {
+      program("1 - 2 * 100") should compute (-199)
+    }
+
+    it("can handle negative numbers") {
+      program("2 * -1") should compute (-2)
+    }
+
+  }
+  
+  describe("Division") {
+
+    it("can divide two numbers") {
+      program("2/2") should compute (1)
+    }
+
+    it("can be chained (and is left-associative with PEMDAS)") {
+      program("100 - 100 / 2") should compute (50)
+    }
+
+    it("can handle negative numbers") {
+      program("2 / -1") should compute (-2)
+    }
+
+  }
+  
+  describe("Parentheses") {
+
+    it("can surround an expression") {
+      program("(2/2)") should compute (1)
+    }
+    
+    it("can surround a single number"){
+      program("(42)") should compute ( 42 )
+    }
+   
+    it("works with PEMDAS") {
+      program("100 / (4 - 2)") should compute (50)
+    }
+
+    it("can handle negative numbers") {
+      program("-(2 / -1)") should compute (2)
+    }
+
+  }
 
 }
