@@ -23,6 +23,22 @@ class NumSemanticsTests extends FunSpec
     }
 
   }
+  
+   describe("Parenthetical Expressions") {
+
+    it("can be a number") {
+      program("(1)") should compute ( 1 )
+    }
+    
+    it ("can be a full expression") {
+      program("(10+10)") should compute ( 20 )
+      program("(10 / 2)") should compute ( 5 )
+    }
+    
+    it ("can be nested") {
+      program("((10 / 2) / 5)") should compute ( 1 )
+    }
+  }
 
   describe("Addition") {
 
@@ -36,6 +52,54 @@ class NumSemanticsTests extends FunSpec
 
     it("can handle negative numbers") {
       program("1 + -1") should compute (0)
+    }
+
+  }
+  
+  describe("Subtraction") {
+
+    it("can subtract two numbers") {
+      program("1-1") should compute (0)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("100 - 2 - 1") should compute (97)
+    }
+
+    it("can handle negative numbers") {
+      program("1 - -1") should compute (2)
+    }
+
+  }
+  
+  describe("Multiplication") {
+
+    it("can multiply two numbers") {
+      program("2*2") should compute (4)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("5 * 2 * 3") should compute (30)
+    }
+
+    it("can handle negative numbers") {
+      program("2 * -1") should compute (-2)
+    }
+
+  }
+    
+  describe("Division") {
+
+    it("can divide two numbers") {
+      program("4/2") should compute (2)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("100 / 2 / 2") should compute (25)
+    }
+
+    it("can handle negative numbers") {
+      program("2 / -1") should compute (-2)
     }
 
   }
