@@ -16,5 +16,10 @@ package object ir {
   //   take the right operand and returns the appropriate Expr 
   implicit class ExprBuilder(val left: Expr) {
     def |+|(right: Expr) = Plus(left, right)
+    def |-|(right: Expr) = Minus(left, right)
+    def |*|(right: Expr) = Multiply(left, right)
+    def |/|(right: Expr) = Divide(left,right)
   }
+  
+  
 }
