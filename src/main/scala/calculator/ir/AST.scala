@@ -18,9 +18,7 @@ sealed abstract class Expr extends AST
 
 case class Plus(left: Expr, right: Expr) extends Expr
 case class Minus(left: Expr, right: Expr) extends Expr
-
 case class Times(left: Expr, right: Expr) extends Expr
 case class Divides(left: Expr, right: Expr) extends Expr
-
 case class Num(n: Int) extends Expr
 case class Parens(exp: Expr) extends Expr
