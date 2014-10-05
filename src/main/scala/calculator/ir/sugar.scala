@@ -23,6 +23,8 @@ package object ir {
     def |-|(right: Expr) = Minus(left, right)
     def |*|(right: Expr) = Times(left, right)
     def |/|(right: Expr) = Divides(left, right)
+    def |<|(right: Expr) = lt(left, right)
+    def |>|(right: Expr) = gt(left, right)
   }
 
 }

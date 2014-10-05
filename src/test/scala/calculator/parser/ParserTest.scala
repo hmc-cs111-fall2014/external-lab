@@ -111,6 +111,38 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
 
   }
 
+  describe("Less than") {
+
+    it("can compare two numbers") {
+      program("1<3") should parseAs (1 |<| 3)
+    }
+
+    it("can compare two equations") {
+      program("3+2<3*2") should parseAs ((3 |+| 2) |<| (3 |*| 2))
+    }
+
+    it("can compare complex equations") {
+      program("3*2<3+2-1") should parseAs ((3 |*| 2) |<| ((3 |+| 2) |-| 1))
+    }
+
+  }
+
+  describe("Greater than") {
+
+    it("can compare two numbers") {
+      program("10>-1") should parseAs (10 |>| -1)
+    }
+
+    it("can compare two equations") {
+      program("3*8>8-3") should parseAs ((3 |*| 8) |>| (8 |-| 3))
+    }
+
+    it("can compare complex equations") {
+      program("(3+8)*7>(2+3+1)+7") should parseAs ((Parens(3 |+| 8) |*| 7) |>| (Parens((2 |+| 3) |+| 1) |+| 7))
+    }
+
+  }
+
   describe("Full equations") {
 
     it("can include multiple operations") {

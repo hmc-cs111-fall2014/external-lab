@@ -25,3 +25,5 @@ case class Times(left: Expr, right: Expr) extends Expr
 case class Divides(left: Expr, right: Expr) extends Expr
 case class Num(n: Int) extends Expr
 case class Parens(exp: Expr) extends Expr
+case class lt(left: Expr, right: Expr) extends Expr
+case class gt(left: Expr, right: Expr) extends Expr

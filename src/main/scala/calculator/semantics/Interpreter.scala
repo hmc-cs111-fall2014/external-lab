@@ -14,5 +14,7 @@ package object semantics {
     case Divides(left, right) => eval(left) / eval(right)
     case Times(left: Expr, right: Expr) => eval(left) * eval(right)
     case Parens(exp: Expr) => eval(exp)
+    case lt(left, right) => if(eval(left) < eval(right)) 1 else 0
+    case gt(left, right) => if(eval(left) > eval(right)) 1 else 0
   }
 }
