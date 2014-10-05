@@ -10,7 +10,7 @@ package calculator.ir
  * 
  *                   n ∈ 𝒵 
  * 
- *       e ∈ Expr ::= e + t | e - t | t
+ *       e ∈ Expr ::= e + t | e - t | t | e < e | e > e | e = e | e ≠ e
  *       t ∈ Term ::= t * f | t / f | f
  *       f ∈ Fact ::= n | ( e )
  *  
@@ -27,3 +27,6 @@ case class Num(n: Int) extends Expr
 case class Parens(exp: Expr) extends Expr
 case class lt(left: Expr, right: Expr) extends Expr
 case class gt(left: Expr, right: Expr) extends Expr
+case class equality(left: Expr, right: Expr) extends Expr
+case class inequality(left: Expr, right: Expr) extends Expr
+case class power(left: Expr, right:Expr) extends Expr

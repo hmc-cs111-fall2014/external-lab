@@ -134,4 +134,36 @@ class NumSemanticsTests extends FunSpec
     }
   }
 
+  describe("Equality") {
+
+    it("can compare two numbers") {
+      program("1=1") should compute (1)
+    }
+
+    it("can compare two equations") {
+      program("1+2=4-1") should compute (1)
+    }
+
+    it("can compare nonequal numbers") {
+      program("1+4=5+2") should compute (0)
+    }
+
+  }
+
+  describe("Inequality") {
+
+    it("can compare two numbers") {
+      program("1≠2") should compute (1)
+    }
+
+    it("can compare two equations") {
+      program("1+2≠3*2") should compute (1)
+    }
+
+    it("returns proper values when numbers are equal") {
+      program("1+2≠4-1") should compute (0)
+    }
+
+  }
+
 }

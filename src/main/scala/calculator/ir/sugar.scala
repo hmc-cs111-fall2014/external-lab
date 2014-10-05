@@ -25,6 +25,9 @@ package object ir {
     def |/|(right: Expr) = Divides(left, right)
     def |<|(right: Expr) = lt(left, right)
     def |>|(right: Expr) = gt(left, right)
+    def |=|(right: Expr) = equality(left, right)
+    def |≠|(right: Expr) = inequality(left, right)
+    def |^|(right: Expr) = power(left, right)
   }
 
 }

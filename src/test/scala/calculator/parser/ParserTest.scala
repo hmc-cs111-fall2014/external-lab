@@ -143,6 +143,34 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
 
   }
 
+  describe("Equality") {
+
+    it("can compare two numbers") {
+      program("1=1") should parseAs (1 |=| 1)
+    }
+
+    it("can compare two equations") {
+      program("1+2=4-1") should parseAs ((1 |+| 2) |=| (4 |-| 1))
+    }
+
+  }
+
+  describe("Inequality") {
+
+    it("can compare two numbers") {
+      program("1≠2") should parseAs (1 |≠| 2)
+    }
+
+    it("can compare two equations") {
+      program("1+2≠3*2") should parseAs ((1 |+| 2) |≠| (3 |*| 2))
+    }
+
+    it("returns proper values when numbers are equal") {
+      program("1+2≠4-1") should parseAs ((1 |+| 2) |≠| (4 |-| 1))
+    }
+
+  }
+
   describe("Full equations") {
 
     it("can include multiple operations") {
