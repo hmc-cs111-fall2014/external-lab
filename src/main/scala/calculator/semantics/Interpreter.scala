@@ -1,5 +1,9 @@
 package calculator
 
+/*
+ * Modified by Sarah Gilkinson
+ */
+
 import calculator.ir._
 
 package object semantics {

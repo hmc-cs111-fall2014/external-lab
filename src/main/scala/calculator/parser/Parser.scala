@@ -1,5 +1,9 @@
 package calculator.parser
 
+/*
+ * Modified by Sarah Gilkinson
+ */
+
 import scala.util.parsing.combinator._
 import calculator.ir._
 

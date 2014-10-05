@@ -1,5 +1,9 @@
 package calculator
 
+/*
+ * Modified by Sarah Gilkinson
+ */
+
 import scala.language.implicitConversions
 
 // internal DSL for creating ASTs

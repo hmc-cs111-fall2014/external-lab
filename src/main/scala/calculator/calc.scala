@@ -1,5 +1,9 @@
 package calculator
 
+/*
+ * Modified by Sarah Gilkinson
+ */
+
 import scala.tools.nsc.EvalLoop
 import calculator.parser.CalcParser
 import calculator.semantics.eval
