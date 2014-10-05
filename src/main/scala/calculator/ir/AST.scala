@@ -12,7 +12,7 @@ package calculator.ir
  * 
  *       e ∈ Expr ::= e + t | e - t | t | e < e | e > e | e = e | e ≠ e
  *       t ∈ Term ::= t * f | t / f | f
- *       f ∈ Fact ::= n | ( e )
+ *       f ∈ Fact ::= n | ( e ) | f^f
  *  
  */
 
