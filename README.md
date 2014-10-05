@@ -43,5 +43,3 @@ Can you give better error-checking and error messages for the parser? For the re
 You could add more features to the language, including
   - comparisons, e.g., `<`, `>`, `=`, etc.
   - constants, e.g., built-in names such as `π` or `e`
-  - variables: assignment and use
-  - functions (either with or without recursion)
