@@ -104,4 +104,32 @@ class NumSemanticsTests extends FunSpec
 
   }
 
+  describe("Comparators") {
+
+    it("can use less than to return true") {
+      program("2 < 3") should compute (1)
+    }
+
+    it("can use less than to return false") {
+      program("3 < 2") should compute (0)
+    }
+
+    it("can use greater than to return true") {
+      program("3 > 2") should compute (1)
+    }
+
+    it("can use greater than to return false") {
+      program("2 > 3") should compute (0)
+    }
+
+    it("can use equality to return true") {
+      program("2 = 2") should compute (1)
+    }
+
+    it("can use equality to return false") {
+      program("2 = 3") should compute (0)
+    }
+
+  }
+
 }

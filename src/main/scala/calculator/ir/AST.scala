@@ -24,5 +24,5 @@ case class Times(left: Expr, right: Expr) extends Expr
 case class Divide(left: Expr, right: Expr) extends Expr
 case class Paren(expr: Expr) extends Expr
 case class LessThan(left: Expr, right: Expr) extends Expr
-case class MoreThan(left: Expr, right: Expr) extends Expr
+case class GreaterThan(left: Expr, right: Expr) extends Expr
 case class Equals(left: Expr, right: Expr) extends Expr

@@ -95,4 +95,20 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
     }
 
   }
+
+  describe("Comparators") {
+
+    it("can use less than") {
+      program("2 < 3") should parseAs ( 2 |<| 3 )
+    }
+
+    it("can use greater than") {
+      program("2 > 3") should parseAs ( 2 |>| 3 )
+    }
+
+    it("can use equality") {
+      program("2 = 3") should parseAs ( 2 |=| 3 )
+    }
+
+  }
 }

@@ -20,7 +20,7 @@ package object ir {
     def |*|(right: Expr) = Times(left, right)
     def |/|(right: Expr) = Divide(left, right)
     def |<|(right: Expr) = LessThan(left, right)
-    def |>|(right: Expr) = MoreThan(left, right)
+    def |>|(right: Expr) = GreaterThan(left, right)
     def |=|(right: Expr) = Equals(left, right)
   }
 }

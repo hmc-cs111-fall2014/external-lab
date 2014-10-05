@@ -11,7 +11,7 @@ package object semantics {
     case Divide(left, right) => eval(left) / eval(right)
     case Paren(expr) => eval(expr)
     case LessThan(left, right) => if (eval(left) < eval(right)) 1 else 0
-    case MoreThan(left, right) => if (eval(left) > eval(right)) 1 else 0
+    case GreaterThan(left, right) => if (eval(left) > eval(right)) 1 else 0
     case Equals(left, right) => if (eval(left) == eval(right)) 1 else 0
   }
 }
