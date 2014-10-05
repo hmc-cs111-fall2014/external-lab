@@ -103,4 +103,35 @@ class NumSemanticsTests extends FunSpec
     }
   }
 
+  describe("Less than") {
+
+    it("can compare two numbers and get true") {
+      program("2<3") should compute (1)
+    }
+
+    it("can compare two numbers and get false") {
+      program("3<2") should compute (0)
+    }
+
+    it("can compare two equations") {
+      program("2+3<3+3") should compute (1)
+    }
+
+  }
+
+  describe("Greater than") {
+
+    it("can compare two numbers and get true") {
+      program("3>2") should compute (1)
+    }
+
+    it("can compare two numbers and get false") {
+      program("3>4") should compute (0)
+    }
+
+    it("can compare two equations") {
+      program("3+2>2+2") should compute (1)
+    }
+  }
+
 }
