@@ -185,4 +185,20 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
       program("-1+(-3+1)+-2") should parseAs ((-1 |+| Parens(-3 |+| 1)) |+| -2)
     }
   }
+
+  describe("Power") {
+
+    it("can take two numbers") {
+      program("2^3") should parseAs (2 |^| 3)
+    }
+
+    it("can take two equations") {
+      program("(3-1)^(1+1)") should parseAs (Parens(3 |-| 1) |^| Parens(1 |+| 1))
+    }
+
+    it("has proper associativity") {
+      program("1+2^3") should parseAs (1 |+| (2 |^| 3))
+    }
+  }
+
 }

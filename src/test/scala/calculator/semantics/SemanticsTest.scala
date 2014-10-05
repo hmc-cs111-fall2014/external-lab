@@ -166,4 +166,19 @@ class NumSemanticsTests extends FunSpec
 
   }
 
+  describe("Power") {
+
+    it("can take two numbers") {
+      program("2^3") should compute (8)
+    }
+
+    it("can take two equations") {
+      program("(3-1)^(1+1)") should compute (4)
+    }
+
+    it("has proper associativity") {
+      program("1+2^3") should compute (9)
+    }
+  }
+
 }
