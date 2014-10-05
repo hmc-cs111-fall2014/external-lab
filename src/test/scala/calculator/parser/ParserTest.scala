@@ -1,5 +1,9 @@
 package calculator.parser
 
+/*
+ * Modified by Sarah Gilkinson
+ */
+
 import org.scalatest._
 
 import calculator.ir._
@@ -35,12 +39,166 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
   describe("Addition") {
 
     it("can add two numbers") {
-      program("1+1") should parseAs ( 1 |+| 1 )
+      program("1 + 1") should parseAs ( 1 |+| 1 )
     }
+
     
     it("can be chained (and is left-associative)") {
-      program("1 + 2 + 100") should parseAs ( (1 |+| 2) |+| 100 )
+      program("1 + 2 + 100") should parseAs ((1 |+| 2) |+| 100 )
     }
 
   }
+
+  describe("Substraction") {
+
+    it("can subtract two numbers") {
+      program("3-1") should parseAs (3 |-| 1)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("3-1-1") should parseAs ((3 |-| 1) |-| 1)
+    }
+
+  }
+
+  describe("Multiplication") {
+
+    it("can multiply two numbers") {
+      program("3*2") should parseAs (3 |*| 2)
+    }
+
+    it("can multiply with a negative") {
+      program("-2*3") should parseAs (-2 |*| 3)
+    }
+
+    it("can multiply with two negatives") {
+      program("-2*-3") should parseAs (-2 |*| -3)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("2*3*4") should parseAs ((2 |*| 3) |*| 4)
+    }
+  }
+
+  describe("Division") {
+
+    it("can divide two numbers") {
+      program("4/2") should parseAs (4 |/| 2)
+    }
+
+    it("can divide with a negative") {
+      program("-4/2") should parseAs (-4 |/| 2)
+    }
+
+    it("can divide with two negatives") {
+      program("-4/-2") should parseAs (-4 |/| -2)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("8/2/2") should parseAs ((8 |/| 2) |/| 2)
+    }
+  }
+
+  describe("Parentheses") {
+
+    it("can surround math") {
+      program("(1+2)") should parseAs (Parens(1 |+| 2))
+    }
+
+    it("can provide associativity") {
+      program("(1+2)-(1+1)") should parseAs (Parens(1 |+| 2) |-| Parens(1 |+| 1))
+    }
+
+  }
+
+  describe("Less than") {
+
+    it("can compare two numbers") {
+      program("1<3") should parseAs (1 |<| 3)
+    }
+
+    it("can compare two equations") {
+      program("3+2<3*2") should parseAs ((3 |+| 2) |<| (3 |*| 2))
+    }
+
+    it("can compare complex equations") {
+      program("3*2<3+2-1") should parseAs ((3 |*| 2) |<| ((3 |+| 2) |-| 1))
+    }
+
+  }
+
+  describe("Greater than") {
+
+    it("can compare two numbers") {
+      program("10>-1") should parseAs (10 |>| -1)
+    }
+
+    it("can compare two equations") {
+      program("3*8>8-3") should parseAs ((3 |*| 8) |>| (8 |-| 3))
+    }
+
+    it("can compare complex equations") {
+      program("(3+8)*7>(2+3+1)+7") should parseAs ((Parens(3 |+| 8) |*| 7) |>| (Parens((2 |+| 3) |+| 1) |+| 7))
+    }
+
+  }
+
+  describe("Equality") {
+
+    it("can compare two numbers") {
+      program("1=1") should parseAs (1 |=| 1)
+    }
+
+    it("can compare two equations") {
+      program("1+2=4-1") should parseAs ((1 |+| 2) |=| (4 |-| 1))
+    }
+
+  }
+
+  describe("Inequality") {
+
+    it("can compare two numbers") {
+      program("1≠2") should parseAs (1 |≠| 2)
+    }
+
+    it("can compare two equations") {
+      program("1+2≠3*2") should parseAs ((1 |+| 2) |≠| (3 |*| 2))
+    }
+
+    it("returns proper values when numbers are equal") {
+      program("1+2≠4-1") should parseAs ((1 |+| 2) |≠| (4 |-| 1))
+    }
+
+  }
+
+  describe("Full equations") {
+
+    it("can include multiple operations") {
+      program("1+2-3*2") should parseAs ((1 |+| 2) |-| (3 |*| 2))
+    }
+
+    it("can include parentheses") {
+      program("1+(2-3)*2") should parseAs (1 |+| (Parens(2 |-| 3) |*| 2))
+    }
+
+    it("can include negative numbers") {
+      program("-1+(-3+1)+-2") should parseAs ((-1 |+| Parens(-3 |+| 1)) |+| -2)
+    }
+  }
+
+  describe("Power") {
+
+    it("can take two numbers") {
+      program("2^3") should parseAs (2 |^| 3)
+    }
+
+    it("can take two equations") {
+      program("(3-1)^(1+1)") should parseAs (Parens(3 |-| 1) |^| Parens(1 |+| 1))
+    }
+
+    it("has proper associativity") {
+      program("1+2^3") should parseAs (1 |+| (2 |^| 3))
+    }
+  }
+
 }

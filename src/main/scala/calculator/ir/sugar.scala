@@ -1,5 +1,9 @@
 package calculator
 
+/*
+ * Modified by Sarah Gilkinson
+ */
+
 import scala.language.implicitConversions
 
 // internal DSL for creating ASTs
@@ -16,5 +20,14 @@ package object ir {
   //   take the right operand and returns the appropriate Expr 
   implicit class ExprBuilder(val left: Expr) {
     def |+|(right: Expr) = Plus(left, right)
+    def |-|(right: Expr) = Minus(left, right)
+    def |*|(right: Expr) = Times(left, right)
+    def |/|(right: Expr) = Divides(left, right)
+    def |<|(right: Expr) = lt(left, right)
+    def |>|(right: Expr) = gt(left, right)
+    def |=|(right: Expr) = equality(left, right)
+    def |≠|(right: Expr) = inequality(left, right)
+    def |^|(right: Expr) = power(left, right)
   }
+
 }

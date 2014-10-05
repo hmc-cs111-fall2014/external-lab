@@ -1,5 +1,9 @@
 package calculator.semantics
 
+/*
+ * Modified by Sarah Gilkinson
+ */
+
 import org.scalatest._
 
 import calculator.ir._
@@ -38,6 +42,143 @@ class NumSemanticsTests extends FunSpec
       program("1 + -1") should compute (0)
     }
 
+  }
+
+  describe("Subtraction") {
+
+    it("can subtract two numbers") {
+      program("3-1") should compute (2)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("4-1-1") should compute (2)
+    }
+
+    it("can handle negative numbers") {
+      program("-1--1") should compute (0)
+    }
+
+  }
+
+  describe("Multiplication") {
+
+    it("can multiply two numbers") {
+      program("2*3") should compute (6)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("2*3*4") should compute (24)
+    }
+
+    it("can handle negative numbers") {
+      program("-1*4") should compute (-4)
+    }
+
+  }
+
+  describe("Division") {
+
+    it("can divide two numbers") {
+      program("8/2") should compute (4)
+    }
+
+    it("can be chained (and is left-associative)") {
+      program("8/2/2") should compute (2)
+    }
+
+    it("can handle negative numbers") {
+      program("-8/-2") should compute (4)
+    }
+
+  }
+
+  describe("Parentheses") {
+
+    it("can provide associativity") {
+      program("1-(2+3)") should compute (-4)
+    }
+
+    it("can surround individual numbers") {
+      program("(2)") should compute (2)
+    }
+  }
+
+  describe("Less than") {
+
+    it("can compare two numbers and get true") {
+      program("2<3") should compute (1)
+    }
+
+    it("can compare two numbers and get false") {
+      program("3<2") should compute (0)
+    }
+
+    it("can compare two equations") {
+      program("2+3<3+3") should compute (1)
+    }
+
+  }
+
+  describe("Greater than") {
+
+    it("can compare two numbers and get true") {
+      program("3>2") should compute (1)
+    }
+
+    it("can compare two numbers and get false") {
+      program("3>4") should compute (0)
+    }
+
+    it("can compare two equations") {
+      program("3+2>2+2") should compute (1)
+    }
+  }
+
+  describe("Equality") {
+
+    it("can compare two numbers") {
+      program("1=1") should compute (1)
+    }
+
+    it("can compare two equations") {
+      program("1+2=4-1") should compute (1)
+    }
+
+    it("can compare nonequal numbers") {
+      program("1+4=5+2") should compute (0)
+    }
+
+  }
+
+  describe("Inequality") {
+
+    it("can compare two numbers") {
+      program("1≠2") should compute (1)
+    }
+
+    it("can compare two equations") {
+      program("1+2≠3*2") should compute (1)
+    }
+
+    it("returns proper values when numbers are equal") {
+      program("1+2≠4-1") should compute (0)
+    }
+
+  }
+
+  describe("Power") {
+
+    it("can take two numbers") {
+      program("2^3") should compute (8)
+    }
+
+    it("can take two equations") {
+      program("(3-1)^(1+1)") should compute (4)
+    }
+
+    it("has proper associativity") {
+      program("1+2^3") should compute (9)
+    }
   }
 
 }
