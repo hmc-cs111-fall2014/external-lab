@@ -43,4 +43,52 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
     }
 
   }
+  
+  describe("Subtraction") {
+
+    it("can subtract two numbers") {
+      program("1-1") should parseAs ( 1 |-| 1 )
+    }
+    
+    it("can be chained (and is left-associative)") {
+      program("1 - 2 - 100") should parseAs ( (1 |-| 2) |-| 100 )
+    }
+
+  }
+  
+  describe("Multiplication") {
+
+    it("can multiply two numbers") {
+      program("1*1") should parseAs ( 1 |*| 1 )
+    }
+    
+    it("can be chained (and is left-associative)") {
+      program("1 * 2 * 100") should parseAs ( (1 |*| 2) |*| 100 )
+    }
+
+  }
+  
+  describe("Division") {
+
+    it("can divide two numbers") {
+      program("1/1") should parseAs ( 1 |/| 1 )
+    }
+    
+    it("can be chained (and is left-associative)") {
+      program("1 / 2 / 100") should parseAs ( (1 |/| 2) |/| 100 )
+    }
+
+  }
+  
+  describe("Parenthetical") {
+
+    it("is fine to surround expressions with parentheses") {
+      program("(1)") should parseAs ( 1 )
+    }
+    
+    it("affects associativity") {
+      program("1 * (2 + 3)") should parseAs ( 1 |*| (2 |+| 3) )
+    }
+
+  }
 }
