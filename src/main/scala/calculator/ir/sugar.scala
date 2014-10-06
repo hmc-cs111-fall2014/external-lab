@@ -2,6 +2,8 @@ package calculator
 
 import scala.language.implicitConversions
 
+// Modified by Jean Sung 
+// CS 111, External Lab 
 // internal DSL for creating ASTs
 package object ir {
 
@@ -16,5 +18,8 @@ package object ir {
   //   take the right operand and returns the appropriate Expr 
   implicit class ExprBuilder(val left: Expr) {
     def |+|(right: Expr) = Plus(left, right)
+    def |-|(right: Expr) = Minus(left, right) 
+    def |*|(right: Expr) = Mult(left, right) 
+    def |/|(right: Expr) = Div(left, right)
   }
 }
