@@ -10,6 +10,8 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
 
   override val parser = CalcParser.apply _
   
+  
+  // number tests 
   describe("A number") {
 
     it("can be a single digit") {
@@ -32,6 +34,7 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
 
   }
   
+  // addition tests 
   describe("Addition") {
 
     it("can add two numbers") {
@@ -42,5 +45,49 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
       program("1 + 2 + 100") should parseAs ( (1 |+| 2) |+| 100 )
     }
 
+  }
+  
+  // subtraction tests 
+  describe("Subtraction") {
+    it ("can subtract a small number from a big number") {
+      program("5-2") should parseAs (5 |-| 2)
+    }
+    
+    it ("can subtract a big number from a small number") {
+      program("2-5") should parseAs(2 |-| 5)
+    }
+    
+    it ("can be chained (and is left associative") {
+      program("1 - 2 - 100") should parseAs ( (1 |-| 2) |-| 100 )
+
+    }
+  }
+  
+    // multiplication tests 
+  describe("Multiplication") {
+    it ("should be able to multiple 2 numbers together") {
+      program("5*2") should parseAs (5 |*| 2)
+    }
+    
+    it ("can be chained (and is left associative") {
+      program("1 * 2 * 100") should parseAs ( (1 |*| 2) |*| 100 )
+
+    }
+  }
+  
+    // division tests 
+  describe("Division") {
+    it ("can divide a small number by a big number") {
+      program("2/5") should parseAs (2 |/| 5)
+    }
+    
+    it ("can divide a big number by a small number") {
+      program("5/2") should parseAs(5 |/| 2)
+    }
+    
+    it ("can be chained (and is left associative") {
+      program("1 / 2 / 100") should parseAs ( (1 |/| 2) |/| 100 )
+
+    }
   }
 }
