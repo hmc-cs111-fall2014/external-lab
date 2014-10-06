@@ -20,10 +20,12 @@ object CalcParser extends JavaTokenParsers with PackratParsers {
         | expr~"/"~fact ^^ {case l~"/"~r ⇒ l |/| r}
         | fact
           )
-        
+                  
     // factors
     lazy val fact: PackratParser[Expr] =
-      number
+      ( "("~expr~")" ^^ {case "("~e~")" => e}
+        | number
+          )
       
     // numbers
     def number: Parser[Num] = wholeNumber ^^ {s ⇒ Num(s.toInt)}

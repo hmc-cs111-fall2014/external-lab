@@ -82,7 +82,7 @@ class NumSemanticsTests extends FunSpec
 
     it("can be chained (and is left-associative)") {
       program("100 + 6 / 2") should compute (103)
-      program("100 / 1 * 2") should compute (102)
+      program("100 / 1 * 2") should compute (200)
       program("100 / 5 + 2") should compute (22)
     }
 
@@ -92,4 +92,12 @@ class NumSemanticsTests extends FunSpec
 
   }
 
+  describe("Parentheses") {
+    it("should not change a value") {
+      program("(4)") should compute (4)
+    }
+    it("can order things") {
+      program("3*(4-4)") should compute (0)
+    }
+  }
 }
