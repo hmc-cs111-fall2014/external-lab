@@ -3,6 +3,8 @@ package calculator.parser
 import scala.util.parsing.combinator._
 import calculator.ir._
 
+// Modified by Jean Sung 
+// CS 111, External Lab 
 object CalcParser extends JavaTokenParsers with PackratParsers {
 
     // parsing interface

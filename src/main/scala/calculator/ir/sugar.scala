@@ -2,6 +2,8 @@ package calculator
 
 import scala.language.implicitConversions
 
+// Modified by Jean Sung 
+// CS 111, External Lab 
 // internal DSL for creating ASTs
 package object ir {
 

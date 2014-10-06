@@ -13,6 +13,8 @@ package calculator.ir
  *  
  */
 
+// Modified by Jean Sung 
+// CS 111, External Lab 
 sealed abstract class AST
 sealed abstract class Expr extends AST
 

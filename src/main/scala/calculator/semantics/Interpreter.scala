@@ -1,7 +1,8 @@
 package calculator
 
 import calculator.ir._
-
+// Modified by Jean Sung 
+// CS 111, External Lab 
 package object semantics {
   def eval(ast: AST): Int = ast match {
     case Num(i) ⇒ i
