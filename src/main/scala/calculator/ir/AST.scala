@@ -1,16 +1,16 @@
 package calculator.ir
-
+import scala.util.parsing.combinator._
 /**
  * -----------
  * Grammar
  * -----------
- * 
- *                   n ∈ 𝒵 
- * 
+ *
+ *                   n ∈ 𝒵
+ *
  *       e ∈ Expr ::= e + t | e - t | t
  *       t ∈ Term ::= t * f | t / f | f
  *       f ∈ Fact ::= n | ( e )
- *  
+ *
  */
 
 sealed abstract class AST
@@ -18,3 +18,6 @@ sealed abstract class Expr extends AST
 
 case class Num(n: Int) extends Expr
 case class Plus(left: Expr, right: Expr) extends Expr
+case class Minus(left: Expr, right: Expr) extends Expr
+case class Times(left: Expr, right: Expr) extends Expr
+case class Divide(left: Expr, right: Expr) extends Expr
