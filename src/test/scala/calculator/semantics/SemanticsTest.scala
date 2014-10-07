@@ -91,4 +91,18 @@ class NumSemanticsTests extends FunSpec
 
   }
 
+  describe("Parensizizization") {
+
+    it("can parenthesize two numbers") {
+      program("(1) + 2") should compute (3)
+      program("2 + (4 + 5)") should compute (11)
+    }
+
+    it("can be chained (and is associative)") {
+      program("1 + (2 + (3 + 4))") should compute (10)
+      program("((1 + 2) + 3) + 4") should compute (10)
+    }
+
+  }
+
 }
