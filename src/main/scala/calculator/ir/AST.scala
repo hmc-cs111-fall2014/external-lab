@@ -19,6 +19,7 @@ sealed abstract class Term extends Expr
 sealed abstract class Fact extends Term
 
 case class Num(n: Int) extends Fact
+case class Parens(e: Expr) extends Fact
 case class Plus(left: Expr, right: Term) extends Expr
 case class Minus(left: Expr, right: Term) extends Expr
 case class Mult(left: Term, right: Fact) extends Term

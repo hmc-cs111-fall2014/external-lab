@@ -96,4 +96,17 @@ class CalcParserTests extends FunSpec with LangParseMatchers[AST] {
     }
 
   }
+
+  describe("Parenthesisation") {
+
+    it("can handle parenthesised numbers") {
+      program("100 + (2)") should parseAs (100 |+| Parens(2))
+      program("(3) + 27") should parseAs (Parens(3) |+| 27)
+    }
+
+    it("can be chained (and is associative)") {
+      program("100 + (2 + (3 + 5))") should parseAs (100 |+| Parens(2 |+| Parens(3 |+| 5)))
+      program("((10 + 5) + 5) + 5") should parseAs (Parens(Parens(10 |+| 5) |+| 5) |+| 5)
+    }
+  }
 }
