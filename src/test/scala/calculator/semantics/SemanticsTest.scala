@@ -53,6 +53,10 @@ class NumSemanticsTests extends FunSpec
     it("can handle negative numbers") {
       program("1 - -1") should compute (2)
     }
+    
+    it("can handle two negative numbers") {
+      program("-1 - -1") should compute (0)
+    }
 
   }
   
